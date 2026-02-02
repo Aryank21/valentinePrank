@@ -22,7 +22,7 @@ body{
     overflow:hidden;
 }
 
-/* Heart Background */
+/* Heart background */
 .heart-bg::before{
     content:"❤";
     font-size:22rem;
@@ -39,7 +39,7 @@ body{
 /* Card */
 .card{
     background:#fff;
-    padding:28px 20px 40px;
+    padding:28px 20px 42px;
     border-radius:22px;
     width:92%;
     max-width:360px;
@@ -55,7 +55,7 @@ h1{
     font-size:1.9rem;
 }
 
-/* Buttons area */
+/* Buttons */
 .buttons{
     position:relative;
     height:120px;
@@ -67,7 +67,6 @@ button{
     border:none;
     border-radius:25px;
     cursor:pointer;
-    transition:0.25s;
 }
 
 #yesBtn{
@@ -93,14 +92,14 @@ button{
     border-radius:16px;
 }
 
-/* Small Signature */
+/* Ultra subtle signature */
 .signature{
     position:absolute;
-    bottom:10px;
-    right:14px;
-    font-size:10px;
-    color:rgba(0,0,0,0.45);
-    letter-spacing:1px;
+    bottom:8px;
+    right:10px;
+    font-size:8px;
+    color:rgba(0,0,0,0.25);
+    letter-spacing:0.8px;
     user-select:none;
 }
 </style>
@@ -119,11 +118,13 @@ button{
     </div>
 
     <div class="meme" id="memeBox">
-        <img src="https://i.imgur.com/6RMhx.gif" alt="Happy Meme">
+        <img 
+          src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGZ5N3Z0dWZ4ZHR5dWZ3YjN4eWd0bGx0ZzZlNm9sYzZ3ZWN3a3JtZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oz8xAFtqoOUUrsh7W/giphy.gif" 
+          alt="Happy Meme">
         <h2>You’re trapped now 😎💖</h2>
     </div>
 
-    <div class="signature">— Aryan</div>
+    <div class="signature">build by aryan</div>
 </div>
 
 <script>
@@ -132,7 +133,7 @@ const yesBtn = document.getElementById("yesBtn");
 const memeBox = document.getElementById("memeBox");
 const btnArea = document.getElementById("btnArea");
 
-/* Initial position */
+/* Initial NO position */
 moveNo();
 
 function moveNo(){
