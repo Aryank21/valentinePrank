@@ -1,205 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Be My Valentine ❤️</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Legendary Valentine 💘</title>
 
 <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
-  min-height:100vh;
-  overflow:hidden;
-  background: linear-gradient(180deg,#ff5f9e,#ff1f6d);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
+    height:100vh;
+    background: linear-gradient(135deg,#ff5f9e,#ffc371);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
 }
 
-/* ❤️ Floating hearts (mobile optimized) */
-.heart{
-  position:fixed;
-  bottom:-30px;
-  font-size:18px;
-  opacity:.7;
-  animation: float 7s linear infinite;
-  pointer-events:none;
-}
-@keyframes float{
-  to{transform:translateY(-110vh);opacity:0}
+.heart-bg::before{
+    content:"❤";
+    font-size:25rem;
+    position:absolute;
+    opacity:0.15;
+    animation: pulse 2s infinite;
 }
 
-/* Main card */
-.card{
-  width:90%;
-  max-width:360px;
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(8px);
-  border-radius:24px;
-  padding:28px 20px 36px;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.35);
-  z-index:5;
-}
-
-.card h1{
-  font-size:1.8rem;
-  margin-bottom:25px;
-  animation:pulse 1.5s infinite;
-}
 @keyframes pulse{
-  50%{transform:scale(1.05)}
+    0%,100%{ transform:scale(1);}
+    50%{ transform:scale(1.1);}
 }
 
-/* YES button */
-#yes{
-  width:100%;
-  padding:15px;
-  font-size:1.1rem;
-  border:none;
-  border-radius:999px;
-  background:#00ffae;
-  color:#003a2b;
-  font-weight:700;
-  box-shadow:0 0 20px #00ffae;
+.card{
+    background:#fff;
+    padding:30px 20px;
+    border-radius:20px;
+    width:90%;
+    max-width:360px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    position:relative;
+    z-index:10;
 }
 
-/* NO button */
-#no{
-  position:fixed;
-  padding:12px 28px;
-  font-size:1rem;
-  border:none;
-  border-radius:999px;
-  background:#ff3b3b;
-  color:white;
-  z-index:9999;
+h1{
+    color:#ff4081;
+    margin-bottom:25px;
+    font-size:1.8rem;
 }
 
-/* Result */
-.result{
-  display:none;
-  text-align:center;
-  z-index:10;
-}
-.result img{
-  width:180px;
-  max-width:80%;
-  margin-bottom:15px;
+.buttons{
+    position:relative;
+    height:120px;
 }
 
-/* Confetti */
-.confetti{
-  position:fixed;
-  width:6px;
-  height:6px;
-  animation: fall 3s linear infinite;
-}
-@keyframes fall{
-  to{transform:translateY(110vh)}
+button{
+    padding:12px 22px;
+    font-size:16px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-/* Signature */
+#yesBtn{
+    background:#ff4081;
+    color:white;
+}
+
+#noBtn{
+    background:#333;
+    color:white;
+    position:absolute;
+}
+
+.meme{
+    display:none;
+    margin-top:20px;
+}
+
+.meme img{
+    width:100%;
+    max-width:250px;
+    border-radius:15px;
+}
+
 .signature{
-  position:fixed;
-  bottom:10px;
-  right:14px;
-  font-size:.8rem;
-  opacity:.6;
-  font-style:italic;
-  user-select:none;
+    margin-top:20px;
+    font-size:12px;
+    color:#777;
 }
 </style>
 </head>
 
 <body>
+<div class="heart-bg"></div>
 
-<div class="card" id="main">
-  <h1>💖 Be My Valentine? 💖</h1>
-  <button id="yes">YES 😍</button>
+<div class="card">
+    <h1>💖 Be My Valentine 💖</h1>
+
+    <div class="buttons" id="btnArea">
+        <button id="yesBtn">Yes 💘</button>
+        <button id="noBtn">No 😏</button>
+    </div>
+
+    <div class="meme" id="memeBox">
+        <img src="https://i.imgur.com/6RMhx.gif" alt="Happy Meme">
+        <h2>You’re trapped now 😎💖</h2>
+    </div>
+
+    <div class="signature">— Aryan Kumar 💌</div>
 </div>
-
-<button id="no">NO 🙄</button>
-
-<div class="result" id="result">
-  <img id="meme" src="">
-  <h1>😆 Knew it!</h1>
-  <p>You’re my Valentine 💕</p>
-</div>
-
-<div class="signature">— Buid By Aryan 😎</div>
 
 <script>
-/* Hearts */
-for(let i=0;i<20;i++){
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(Math.random()*3+5)+"s";
-  document.body.appendChild(h);
-}
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const memeBox = document.getElementById("memeBox");
+const btnArea = document.getElementById("btnArea");
 
-/* NO button logic (touch + mouse) */
-const noBtn=document.getElementById("no");
-
-function moveNo(){
-  const w=noBtn.offsetWidth;
-  const h=noBtn.offsetHeight;
-  const x=Math.random()*(window.innerWidth-w-10);
-  const y=Math.random()*(window.innerHeight-h-10);
-  noBtn.style.left=x+"px";
-  noBtn.style.top=y+"px";
-}
+// initial NO position
 moveNo();
 
-noBtn.addEventListener("mouseenter",moveNo);
-noBtn.addEventListener("touchstart",moveNo);
+function moveNo(){
+    const areaRect = btnArea.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
 
-/* Finger repulsion */
-document.addEventListener("touchmove",e=>{
-  const t=e.touches[0];
-  const r=noBtn.getBoundingClientRect();
-  const d=Math.hypot(
-    t.clientX-(r.left+r.width/2),
-    t.clientY-(r.top+r.height/2)
-  );
-  if(d<120) moveNo();
+    let x = Math.random() * (areaRect.width - btnRect.width);
+    let y = Math.random() * (areaRect.height - btnRect.height);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+// hover + touch (mobile support)
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+yesBtn.addEventListener("click", ()=>{
+    btnArea.style.display = "none";   // buttons gone forever
+    memeBox.style.display = "block";  // meme appears
 });
-
-/* YES action */
-document.getElementById("yes").onclick=()=>{
-  document.getElementById("main").style.display="none";
-  document.getElementById("result").style.display="block";
-  document.body.style.background="linear-gradient(180deg,#00ffae,#007cff)";
-  confetti();
-  meme();
-};
-
-/* Confetti */
-function confetti(){
-  for(let i=0;i<60;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(c);
-  }
-}
-
-/* Meme (safe emoji fallback) */
-function meme(){
-  document.getElementById("meme").src=
-  "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif";
-}
 </script>
-
 </body>
 </html>
